@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HTMLPaser.cs" />
+    <Compile Include="SearchConfig.cs" />
+    <Compile Include="SearchEngine.cs" />
+    <Compile Include="SearchFactory.cs" />
     <Compile Include="SearchFight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

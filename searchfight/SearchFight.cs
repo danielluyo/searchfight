@@ -8,6 +8,8 @@ namespace searchfight
 {
     class SearchFight
     {
+        public static SearchFactory searchFactory;
+
         /// <summary>
         /// Main entry point
         /// </summary>
@@ -15,9 +17,19 @@ namespace searchfight
         ///                    help text is provided.</param>
         static void Main(string[] args)
         {
+            
+
             if (args.Length == 0)
             {
                 ShowUsage();
+
+            }
+            else
+            {
+                searchFactory = SearchFactory.Instance;
+                searchFactory.Search(args);
+
+                Console.WriteLine(searchFactory.ToString());
             }
             Console.ReadLine();
         }
