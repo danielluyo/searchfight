@@ -44,10 +44,10 @@ namespace searchfight
 
         /// <summary>
         /// Loads the Search Engines from file.
-        /// If the file does not exists, e.g. on the first run, a default engine is created using Google.
+        /// If the file does not exists, e.g. on the first run, a default engines are created 
+        /// for Google and Bing.
         /// </summary>
-        /// <returns></returns>
-        public bool LoadConfig()
+        public void LoadConfig()
         {
             XmlDocument confDoc = new XmlDocument();         
 
@@ -55,10 +55,20 @@ namespace searchfight
             {
                 SearchEngine defaultEngine = new SearchEngine();
                 defaultEngine.Name = "Google";
-                //defaultEngine.URL = @"https://www.google.com";
                 defaultEngine.URL = @"https://www.google.com/search?hl=en&q={0}";
+                defaultEngine.FilterElement = "div";
+                defaultEngine.FilterId = "id";
                 defaultEngine.FilterCounter = "resultStats";
                 EngineList.Add(defaultEngine);
+
+                SearchEngine defaultEngine2 = new SearchEngine();
+                defaultEngine2.Name = "Bing";
+                defaultEngine2.URL = @"https://www.bing.com/search?q={0}";
+                defaultEngine2.FilterElement = "span";
+                defaultEngine2.FilterId = "class";
+                defaultEngine2.FilterCounter = "sb_count";
+                EngineList.Add(defaultEngine2);
+
                 SaveConfig();
             }
 
@@ -68,15 +78,13 @@ namespace searchfight
             {
                 EngineList = (SearchEngineList)serialzer.Deserialize(sr);
             }
-
-            return false;
         }
 
         /// <summary>
-        /// 
+        /// Save the configuration to File
         /// </summary>
         /// <returns></returns>
-        public bool SaveConfig()
+        public void SaveConfig()
         {
             XmlSerializer serialzer = new XmlSerializer(typeof(SearchEngineList));
 
@@ -87,10 +95,12 @@ namespace searchfight
                     serialzer.Serialize(writer, EngineList);
                 }
             }
-            return false;
         }
     }
 
+    /// <summary>
+    /// Defines a List Wrapper to add a customized XML Root Element
+    /// </summary>
     [XmlRoot("SearchEngineList")]
     public class SearchEngineList : List<SearchEngine> { }
 }

@@ -17,22 +17,19 @@ namespace searchfight
         ///                    help text is provided.</param>
         static void Main(string[] args)
         {
-            
-
             if (args.Length == 0)
             {
                 ShowUsage();
-
             }
             else
             {
                 searchFactory = SearchFactory.Instance;
                 searchFactory.Search(args);
-
-                Console.WriteLine(searchFactory.ToString());
-            }
+                searchFactory.ShowResults();            }
             Console.ReadLine();
         }
+
+
 
         /// <summary>
         /// Show help for the program.

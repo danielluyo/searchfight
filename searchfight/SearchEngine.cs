@@ -10,7 +10,8 @@ namespace searchfight
     {
         public String Name { get; set; }
         public String URL { get; set; }
-        public String FilterBox { get; set; }
+        public String FilterElement { get; set; }
+        public String FilterId { get; set; }
         public String FilterCounter { get; set; }
     }
 }
